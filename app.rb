@@ -29,7 +29,8 @@ end
 set title: 'Biotic', width: FULL_WIDTH, height: FULL_HEIGHT
 char = 'A'
 render_scoreboard(Morphogen.classes.map do |k|
-  k.new(world_height: HEIGHT, world_width: WIDTH, char: char.succ!)
+  char = char.succ
+  k.new(char: char)
 end)
 
 show
