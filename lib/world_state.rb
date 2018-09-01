@@ -26,4 +26,12 @@ class WorldState < String
     return if self[position] == ' '
     self[position]
   end
+
+  # Note: the neighborhood includes the neighbors and the position passed
+  def neighborhood(position)
+    return [] if position.negative?
+    return [] if position >= length
+
+    []
+  end
 end
