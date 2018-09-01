@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'bundler/setup'
 require 'ruby2d'
@@ -11,7 +13,7 @@ GUTTER      = 24
 SIDEBAR     = 240
 FULL_HEIGHT = HEIGHT * CELL_SIZE
 FULL_WIDTH  = WIDTH * CELL_SIZE + GUTTER + SIDEBAR
-FONT        = 'resources/Lato.ttf'.freeze
+FONT        = 'resources/Lato.ttf'
 FONT_SIZE   = 24
 
 def render_scoreboard(morphogens)
@@ -26,7 +28,7 @@ end
 
 set title: 'Biotic', width: FULL_WIDTH, height: FULL_HEIGHT
 char = 'A'
-render_scoreboard(Morphogen.children.map do |k|
+render_scoreboard(Morphogen.classes.map do |k|
   k.new(world_height: HEIGHT, world_width: WIDTH, char: char.succ!)
 end)
 

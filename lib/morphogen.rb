@@ -1,12 +1,13 @@
-#
-# Base class for creating entities in the game
-#
+# frozen_string_literal: true
+
+# module Morphogen
 module Morphogen
   class << self
-    attr_reader :children
+    attr_reader :classes
 
     def included(klass)
-      @children = (@children || []).push(klass)
+      @classes ||= []
+      @classes << klass
     end
   end
 
