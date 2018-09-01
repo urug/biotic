@@ -11,10 +11,8 @@ module Morphogen
     end
   end
 
-  def initialize(world_width:, world_height:, char:)
-    @width  = world_width
-    @height = world_height
-    @char   = char
+  def initialize(char:)
+    @char = char
   end
 
   def name

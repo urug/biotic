@@ -6,7 +6,7 @@ end
 
 describe SimpleMorphogen do
   before do
-    @morph = SimpleMorphogen.new(world_height: 8, world_width: 8, char: 'S')
+    @morph = SimpleMorphogen.new(char: 'S')
   end
 
   describe '#name' do
