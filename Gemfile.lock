@@ -14,6 +14,7 @@ GEM
     ruby2d (0.5.1)
       opal (~> 0.11)
     sourcemap (0.1.1)
+    yard (0.9.16)
 
 PLATFORMS
   ruby
@@ -21,6 +22,7 @@ PLATFORMS
 DEPENDENCIES
   minitest
   ruby2d
+  yard
 
 RUBY VERSION
    ruby 2.5.1p57
