@@ -1,1 +1,11 @@
-LineLength: { Max: 89 }
+LineLength:
+  Max: 89
+
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**'
+
+Lint/UnneededCopDisableDirective:
+  Exclude:
+    - 'test/**'
+

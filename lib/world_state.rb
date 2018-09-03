@@ -29,24 +29,68 @@ class WorldState < String
   end
 
   # @param position [Integer] a position in the world
-  # @return [String] the team character for a live cell, or space if dead cell
-  def team(position)
+  # @return [String] the owner character for a live cell, or space if dead cell
+  def o(position)
     return if position.negative?
     return if self[position] == ' '
     self[position]
   end
+  alias owner o
+
+  def nw(pos)
+    w(n(pos))
+  end
+  alias northwest nw
+
+  def n(pos)
+  end
+  alias north n
+
+  def ne(pos)
+    e(n(pos))
+  end
+  alias northeast ne
+
+  def w(pos)
+  end
+  aliast west w
+
+  def e(pos)
+  end
+  alias east e
+
+  def sw(pos)
+    w(s(pos))
+  end
+  alias southwest sw
+
+  def s(pos)
+  end
+  alias south s
+
+  def se(pos)
+    e(s(pos))
+  end
+  alias southeast se
 
   # @param position [Integer] a position in the world
-  # @return [Array<String>] the team chars or emptiness around the position and what is
+  # @return [Array<String>] the owner chars or emptiness around the position and what is
   # in that position
-  def neighborhood(position)
-    return [] if position.negative?
-    return [] if position >= length
+  def neighborhood(pos)
+    return [] unless valid_position?(pos)
 
-    x = position % @width
-    y = position / @width
     [
-
+      nw(pos), n(pos), ne(pos),
+       w(pos), o(pos), e(pos), # rubocop:disable Layout/AlignArray
+      sw(pos), s(pos), se(pos)
     ]
+  end
+
+  private
+
+  def valid_position?(pos)
+    return if pos.negative?
+    return if pos >= length
+    true
   end
 end

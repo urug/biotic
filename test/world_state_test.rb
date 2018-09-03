@@ -37,13 +37,13 @@ describe WorldState do
     end
   end
 
-  describe '#team' do
-    it 'must return the team character for a position' do
+  describe '#owner' do
+    it 'must return the owner character for a position' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
       world.team(0).must_equal 'X'
     end
 
-    it 'must return nil if there is no team character at position' do
+    it 'must return nil if there is no owner character at position' do
       world = WorldState.new(width: 1, height: 1)
       world.team(0).must_be_nil
     end

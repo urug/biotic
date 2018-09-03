@@ -39,7 +39,7 @@ module Morphogen
       'X X X X ',
       ' X X X X',
       'X X X X ',
-      ' X X X X',
+      ' X X X X'
     ]
   end
 
