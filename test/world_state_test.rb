@@ -3,6 +3,19 @@
 require_relative 'test_helper'
 
 describe WorldState do
+  describe '#initialize' do
+    it 'must raise for invalid dimensions' do
+      -> { WorldState.new(width: 0, height: 1) }.must_raise WorldState::InvalidDimension
+      -> { WorldState.new(width: 1, height: 0) }.must_raise WorldState::InvalidDimension
+    end
+
+    it 'must raise for an invalid initial state' do
+      lambda do
+        WorldState.new(width: 1, height: 1, state: '12')
+      end.must_raise WorldState::InvalidState
+    end
+  end
+
   describe '#live?' do
     it 'must return true if the cell at `position` is alive' do
       world = WorldState.new(width: 1, height: 1, state: 'X')

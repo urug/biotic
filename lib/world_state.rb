@@ -5,14 +5,16 @@ class WorldState < String
   attr_reader :width
   attr_reader :height
 
-  class BadState < StandardError; end
+  class InvalidDimension < StandardError; end
+  class InvalidState < StandardError; end
   class InvalidPosition < StandardError; end
 
   # @param width [Integer] how wide the world is
   # @param height [Integer] how high the world is
   # @param state [String] an initial state
   def initialize(width:, height:, state: nil)
-    raise BadState if state && width * height != state.length
+    raise InvalidDimension if width < 1 || height < 1
+    raise InvalidState if state && width * height != state.length
 
     state ? super(state) : super(' ' * (width * height))
     @width = width
