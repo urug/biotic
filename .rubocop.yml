@@ -1,5 +1,14 @@
 LineLength:
-  Max: 89
+  Max: 90
+
+Metrics/MethodLength:
+  Max: 16
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
 
 Metrics/BlockLength:
   Exclude:

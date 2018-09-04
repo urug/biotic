@@ -112,13 +112,13 @@ class WorldState < String
   end
   alias southeast se
 
-  # @param position [Integer] a position in the world
+  # @param pos [Integer] a position in the world
   # @return [Array<String>] the owner chars or emptiness around the position and what is
   # in that position
   # rubocop:disable Layout/AlignArray
   # rubocop:disable Layout/ExtraSpacing
   # rubocop:disable Metrics/AbcSize
-  # I like how this is written, rubocop
+  # I like how this reads as written, rubocop
   def neighborhood(pos)
     valid_position?(pos)
 
@@ -130,10 +130,57 @@ class WorldState < String
   end
   # rubocop:enable all
 
+  # @param pos [Integer] a position in the world
+  # return [String] the owner char of this position in the next state; space if dead
+  def next(pos)
+    valid_position?(pos)
+    nhood = neighborhood(pos)
+
+    return handle_dead(nhood) if o(pos) == ' '
+
+    # overpopulation
+    return ' ' if nhood.count(' ') < 5
+    # underpopulation
+    return ' ' if nhood.count(' ') > 6
+
+    return handle_two_neighbors(nhood) if nhood.count(' ') == 6
+
+    handle_three_neighbors(nhood)
+  end
+
   private
 
   def valid_position?(pos)
     raise InvalidPosition if pos.negative?
     raise InvalidPosition if pos >= length
+  end
+
+  def majority(neighborhood)
+    neighborhood.reject { |i| i == ' ' }.max_by { |i| neighborhood.count(i) }
+  end
+
+  def handle_dead(neighborhood)
+    # dead stays dead unless 3 live neighbors
+    return ' ' unless neighborhood.count(' ') == 6
+    # no clear winner, no reproduction
+    return ' ' if neighborhood.uniq.count == 4
+
+    majority(neighborhood)
+  end
+
+  def handle_two_neighbors(neighborhood)
+    # two neighbors are different, stay the same
+    return neighborhood[4] if neighborhood.uniq.count == 4
+
+    majority(neighborhood)
+  end
+
+  def handle_three_neighbors(neighborhood)
+    # no majority, stay the same
+    return neighborhood[4] if neighborhood.uniq.count == 5
+    # have an ally, stay the same
+    return neighborhood[4] if neighborhood.count(neighborhood[4]) > 1
+
+    majority(neighborhood)
   end
 end

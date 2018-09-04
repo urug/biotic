@@ -145,4 +145,61 @@ describe WorldState do
       world.neighborhood(11).must_equal %w[G H E K L I C D A]
     end
   end
+
+  describe '#next' do
+    it 'must return a space for an empty neighborhood' do
+      world = WorldState.new(width: 3, height: 3, state: '         ')
+      world.next(4).must_equal ' '
+    end
+
+    it 'must return a space for a live cell with only one neighbor' do
+      world = WorldState.new(width: 3, height: 3, state: '    AB   ')
+      world.next(4).must_equal ' '
+    end
+
+    it 'must return the same character with two different neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: '   ABC   ')
+      world.next(4).must_equal 'B'
+    end
+
+    it 'must return the neighbor character outnumbered by two neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: '   ABA   ')
+      world.next(4).must_equal 'A'
+    end
+
+    it 'must return the neighbor character if outnumbered and has three neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: ' A ABC   ')
+      world.next(4).must_equal 'A'
+    end
+
+    it 'must return the same if not outnumbered and has three neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: ' A ABB   ')
+      world.next(4).must_equal 'B'
+    end
+
+    it 'must die of overpopulation with four neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: ' A ABBA  ')
+      world.next(4).must_equal ' '
+    end
+
+    it 'must die of overpopulation with five neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: 'AA ABBA  ')
+      world.next(4).must_equal ' '
+    end
+
+    it 'must die of overpopulation with six neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: 'AAAABBA  ')
+      world.next(4).must_equal ' '
+    end
+
+    it 'must die of overpopulation with seven neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: 'AAAABBAA ')
+      world.next(4).must_equal ' '
+    end
+
+    it 'must die of overpopulation with seven neighbors' do
+      world = WorldState.new(width: 3, height: 3, state: 'AAAABBAAA')
+      world.next(4).must_equal ' '
+    end
+  end
 end
