@@ -124,7 +124,7 @@ describe WorldState do
       -> { world.neighborhood(-1) }.must_raise WorldState::InvalidPosition
     end
 
-    it 'must return [] for a position beyond the end' do
+    it 'must raise for a position beyond the end' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
       -> { world.neighborhood(1) }.must_raise WorldState::InvalidPosition
     end
