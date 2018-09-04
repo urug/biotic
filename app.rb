@@ -44,4 +44,3 @@ update do
   redraw if (0.5 * (get :frames).to_i % (get :fps).to_i).zero?
 end
 show
-
