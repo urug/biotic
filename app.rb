@@ -6,6 +6,10 @@ require 'ruby2d'
 require './lib/morphogen'
 Dir['./morphogens/*.rb'].each { |file| require file }
 
+# https://freemusicarchive.org/music/Christian_Bjoerklund/
+MUSIC       = 'resources/Hallon.mp3'
+FONT        = 'resources/Lato.ttf'
+FONT_SIZE   = 24
 WIDTH       = 120
 HEIGHT      = 90
 CELL_SIZE   = 8
@@ -13,8 +17,6 @@ GUTTER      = 24
 SIDEBAR     = 240
 FULL_HEIGHT = HEIGHT * CELL_SIZE
 FULL_WIDTH  = WIDTH * CELL_SIZE + GUTTER + SIDEBAR
-FONT        = 'resources/Lato.ttf'
-FONT_SIZE   = 24
 
 def render_scoreboard(morphogens)
   y = 0
@@ -34,3 +36,4 @@ render_scoreboard(Morphogen.classes.map do |k|
 end)
 
 show
+
