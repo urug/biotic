@@ -8,6 +8,5 @@ class World
     @state = WorldState.new(width: width, height: height, state: init)
   end
 
-  def iterate
-  end
+  def iterate; end
 end

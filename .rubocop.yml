@@ -10,6 +10,9 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Max: 10
 
+Metrics/ClassLength:
+  Max: 120
+
 Metrics/BlockLength:
   Exclude:
     - 'test/**'

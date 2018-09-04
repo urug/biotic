@@ -43,6 +43,5 @@ module Morphogen
     ]
   end
 
-  def moves(world_state)
-  end
+  def moves(world_state); end
 end

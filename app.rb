@@ -34,4 +34,3 @@ render_scoreboard(Morphogen.classes.map do |k|
 end)
 
 show
-
