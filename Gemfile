@@ -9,6 +9,7 @@ gem 'yard'
 
 group :test do
   gem 'minitest'
+  gem 'minitest-focus'
   gem 'pry'
   gem 'pry-awesome_print'
   gem 'pry-byebug'

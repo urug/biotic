@@ -14,9 +14,9 @@ describe WorldState do
       world.live?(0).must_equal false
     end
 
-    it 'must return nil for positions outside of the world' do
+    it 'must raise for positions outside of the world' do
       world = WorldState.new(width: 1, height: 1, state: ' ')
-      world.live?(1).must_be_nil
+      -> { world.live?(1) }.must_raise WorldState::InvalidPosition
     end
   end
 
@@ -31,9 +31,9 @@ describe WorldState do
       world.dead?(0).must_equal false
     end
 
-    it 'must return nil for positions outside of the world' do
+    it 'must raise for positions outside of the world' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
-      world.dead?(-1).must_be_nil
+      -> { world.dead?(-1) }.must_raise WorldState::InvalidPosition
     end
   end
 
@@ -48,9 +48,9 @@ describe WorldState do
       world.owner(0).must_be_nil
     end
 
-    it 'must return nil if the position is outside of the world' do
+    it 'must raise if the position is outside of the world' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
-      world.owner(-1).must_be_nil
+      -> { world.owner(-1) }.must_raise WorldState::InvalidPosition
     end
   end
 
@@ -106,14 +106,14 @@ describe WorldState do
   end
 
   describe '#neighborhood' do
-    it 'must return [] for a position before the beginning' do
+    it 'must raise for a position before the beginning' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
-      world.neighborhood(-1).must_equal []
+      -> { world.neighborhood(-1) }.must_raise WorldState::InvalidPosition
     end
 
     it 'must return [] for a position beyond the end' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
-      world.neighborhood(1).must_equal []
+      -> { world.neighborhood(1) }.must_raise WorldState::InvalidPosition
     end
 
     # ABCD

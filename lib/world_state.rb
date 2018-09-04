@@ -6,6 +6,7 @@ class WorldState < String
   attr_reader :height
 
   class BadState < StandardError; end
+  class InvalidPosition < StandardError; end
 
   # @param width [Integer] how wide the world is
   # @param height [Integer] how high the world is
@@ -21,21 +22,21 @@ class WorldState < String
   # @param pos [Integer] a position in the world
   # @return [Boolean] true if the cell at position is live and false if it is dead
   def live?(pos)
-    return if pos.negative?
+    valid_position?(pos)
     self[pos] && self[pos] != ' '
   end
 
   # @param pos [Integer] a position in the world
   # @return [Boolean] true if the cell at position is dead and false if it is live
   def dead?(pos)
-    return if pos.negative?
+    valid_position?(pos)
     self[pos] && self[pos] == ' '
   end
 
   # @param pos [Integer] a position in the world
   # @return [String] the owner character for a live cell, or space if dead cell
   def o(pos)
-    return if pos.negative?
+    valid_position?(pos)
     return if self[pos] == ' '
     self[pos]
   end
@@ -44,6 +45,7 @@ class WorldState < String
   # @param position [Integer] a position in the world
   # @return [Integer] the position northwest (up, left) of the position
   def nw(pos)
+    valid_position?(pos)
     w(n(pos))
   end
   alias northwest nw
@@ -51,6 +53,7 @@ class WorldState < String
   # @param pos [Integer] a position in the world
   # @return [Integer] the position north (up) of the position
   def n(pos)
+    valid_position?(pos)
     return pos + @width * (@height - 1) if (pos / @width).zero? # top edge case
     pos - @width
   end
@@ -59,6 +62,7 @@ class WorldState < String
   # @param pos [Integer] a position in the world
   # @return [Integer] the position northest (up, right) of the position
   def ne(pos)
+    valid_position?(pos)
     e(n(pos))
   end
   alias northeast ne
@@ -66,7 +70,8 @@ class WorldState < String
   # @param pos [Integer] a position in the world
   # @return [Integer] the position west (left) of the position
   def w(pos)
-    return pos - 1 + @width if (pos % @width).zero?
+    valid_position?(pos)
+    return pos - 1 + @width if (pos % @width).zero? # left edge case
     pos - 1
   end
   alias west w
@@ -74,6 +79,7 @@ class WorldState < String
   # @param pos [Integer] a position in the world
   # @return [Integer] the position east (right) of the position
   def e(pos)
+    valid_position?(pos)
     return pos + 1 - @width if (pos % @width) == @width - 1 # right edge case
     pos + 1
   end
@@ -82,6 +88,7 @@ class WorldState < String
   # @param pos [Integer] a position in the world
   # @return [Integer] the position southeast (down, left) of the position
   def sw(pos)
+    valid_position?(pos)
     w(s(pos))
   end
   alias southwest sw
@@ -89,6 +96,7 @@ class WorldState < String
   # @param pos [Integer] a position in the world
   # @return [Integer] the position south (down) of the position
   def s(pos)
+    valid_position?(pos)
     return pos % @width if (pos / @width) == @height - 1 # bottom edge case
     pos + @width
   end
@@ -97,6 +105,7 @@ class WorldState < String
   # @param pos [Integer] a position in the world
   # @return [Integer] the position southeast (down, left) of the position
   def se(pos)
+    valid_position?(pos)
     e(s(pos))
   end
   alias southeast se
@@ -109,7 +118,7 @@ class WorldState < String
   # rubocop:disable Metrics/AbcSize
   # I like how this is written, rubocop
   def neighborhood(pos)
-    return [] unless valid_position?(pos)
+    valid_position?(pos)
 
     [
       self[nw(pos)], self[n(pos)], self[ne(pos)],
@@ -122,8 +131,7 @@ class WorldState < String
   private
 
   def valid_position?(pos)
-    return if pos.negative?
-    return if pos >= length
-    true
+    raise InvalidPosition if pos.negative?
+    raise InvalidPosition if pos >= length
   end
 end
