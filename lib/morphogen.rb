@@ -3,6 +3,8 @@
 # module Morphogen
 module Morphogen
   class << self
+    # An array of the classes that have included this module
+    # @return [Array<Class>]
     attr_reader :classes
 
     def included(klass)
@@ -11,25 +13,30 @@ module Morphogen
     end
   end
 
-  # @param char [String] the character assigned to this class by the game and how the
-  # world will represent this class in the game
+  # The character assigned to this class by the game and how the world will represent
+  # this class in the game
+  # @param char [String]
   def initialize(char:)
     @char = char
   end
 
-  # @return [String] the name use to represent this class
+  # The name use to represent this classs
+  # @return [String]
   def name
     self.class.to_s
   end
 
-  # @return [String] a hex color string used to represent this class. It is recommended
-  # that you overwrite this method
+  # You should overwrite this method.
+  # A hex color string used to represent this class.
+  # @return [String]
   def color
     '#' + %w[0 3 6 9 C F].shuffle.join
   end
 
-  # @return [String] an 8x8 block representing how the starting cells for this class will
-  # be initialized into the world. It is recommended that you overwrite this method
+  # You should overwrite this method.
+  # An 8x8 block representing how the starting cells for this class will be initialized
+  # into the world.
+  # @return [Integer] the heigh of the world
   def seed
     [
       'X X X X ',

@@ -2,11 +2,16 @@
 
 # class WorldState
 class WorldState < String
+  # @return [Integer] the width of the world
   attr_reader :width
+  # @return [Integer] the heigh of the world
   attr_reader :height
 
+  # raised when a dimension is invalid
   class InvalidDimension < StandardError; end
+  # raised when a initial state is invalid
   class InvalidState < StandardError; end
+  # raised when a position is outside of the world
   class InvalidPosition < StandardError; end
 
   # @param width [Integer] how wide the world is
@@ -21,22 +26,25 @@ class WorldState < String
     @height = height
   end
 
-  # @param pos [Integer] a position in the world
-  # @return [Boolean] true if the cell at position is live and false if it is dead
+  # true if the cell at position is live and false if it is dead
+  # @param pos [Integer]
+  # @return [Boolean]
   def live?(pos)
     valid_position?(pos)
     self[pos] && self[pos] != ' '
   end
 
-  # @param pos [Integer] a position in the world
-  # @return [Boolean] true if the cell at position is dead and false if it is live
+  # true if the cell at position is dead and false if it is live
+  # @param pos [Integer]
+  # @return [Boolean]
   def dead?(pos)
     valid_position?(pos)
     self[pos] && self[pos] == ' '
   end
 
-  # @param pos [Integer] a position in the world
-  # @return [String] the owner character for a live cell, or space if dead cell
+  # the owner character for a live cell, or space if dead cell
+  # @param pos [Integer]
+  # @return [String]
   def o(pos)
     valid_position?(pos)
     return if self[pos] == ' '
@@ -44,16 +52,18 @@ class WorldState < String
   end
   alias owner o
 
-  # @param position [Integer] a position in the world
-  # @return [Integer] the position northwest (up, left) of the position
+  # the position northwest (up, left) of the position
+  # @param pos [Integer]
+  # @return [Integer]
   def nw(pos)
     valid_position?(pos)
     w(n(pos))
   end
   alias northwest nw
 
-  # @param pos [Integer] a position in the world
-  # @return [Integer] the position north (up) of the position
+  # the position north (up) of the position
+  # @param pos [Integer]
+  # @return [Integer]
   def n(pos)
     valid_position?(pos)
     return pos + @width * (@height - 1) if (pos / @width).zero? # top edge case
@@ -61,16 +71,18 @@ class WorldState < String
   end
   alias north n
 
-  # @param pos [Integer] a position in the world
-  # @return [Integer] the position northest (up, right) of the position
+  # The position northest (up, right) of the position
+  # @param pos [Integer]
+  # @return [Integer]
   def ne(pos)
     valid_position?(pos)
     e(n(pos))
   end
   alias northeast ne
 
-  # @param pos [Integer] a position in the world
-  # @return [Integer] the position west (left) of the position
+  # The position west (left) of the position
+  # @param pos [Integer]
+  # @return [Integer]
   def w(pos)
     valid_position?(pos)
     return pos - 1 + @width if (pos % @width).zero? # left edge case
@@ -78,8 +90,9 @@ class WorldState < String
   end
   alias west w
 
-  # @param pos [Integer] a position in the world
-  # @return [Integer] the position east (right) of the position
+  # The position east (right) of the position
+  # @param pos [Integer]
+  # @return [Integer]
   def e(pos)
     valid_position?(pos)
     return pos + 1 - @width if (pos % @width) == @width - 1 # right edge case
@@ -87,16 +100,18 @@ class WorldState < String
   end
   alias east e
 
-  # @param pos [Integer] a position in the world
-  # @return [Integer] the position southeast (down, left) of the position
+  # The position southeast (down, left) of the position
+  # @param pos [Integer]
+  # @return [Integer]
   def sw(pos)
     valid_position?(pos)
     w(s(pos))
   end
   alias southwest sw
 
-  # @param pos [Integer] a position in the world
-  # @return [Integer] the position south (down) of the position
+  # The position south (down) of the position
+  # @param pos [Integer]
+  # @return [Integer]
   def s(pos)
     valid_position?(pos)
     return pos % @width if (pos / @width) == @height - 1 # bottom edge case
@@ -104,21 +119,23 @@ class WorldState < String
   end
   alias south s
 
-  # @param pos [Integer] a position in the world
-  # @return [Integer] the position southeast (down, left) of the position
+  # The position southeast (down, left) of the position
+  # @param pos [Integer]
+  # @return [Integer]
   def se(pos)
     valid_position?(pos)
     e(s(pos))
   end
   alias southeast se
 
-  # @param pos [Integer] a position in the world
-  # @return [Array<String>] the owner chars or emptiness around the position and what is
-  # in that position
   # rubocop:disable Layout/AlignArray
   # rubocop:disable Layout/ExtraSpacing
   # rubocop:disable Metrics/AbcSize
   # I like how this reads as written, rubocop
+
+  # The owner chars or emptiness around the position (includes position)
+  # @param pos [Integer] a position in the world
+  # @return [Array<String>]
   def neighborhood(pos)
     valid_position?(pos)
 
@@ -130,8 +147,9 @@ class WorldState < String
   end
   # rubocop:enable all
 
-  # @param pos [Integer] a position in the world
-  # return [String] the owner char of this position in the next state; space if dead
+  # The owner char of this position in the next state; space if dead
+  # @param pos [Integer]
+  # @return [String]
   def next(pos)
     valid_position?(pos)
     nhood = neighborhood(pos)

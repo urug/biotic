@@ -104,7 +104,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#classes-class_method" title="classes (class method)">.<strong>classes</strong>  &#x21d2; Object </a>
+      <a href="#classes-class_method" title="classes (class method)">.<strong>classes</strong>  &#x21d2; Array&lt;Class&gt; </a>
     
 
     
@@ -124,7 +124,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute classes.</p>
+<p>An array of the classes that have included this module.</p>
 </div></span>
   
 </li>
@@ -192,7 +192,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>that you overwrite this method.</p>
+<p>You should overwrite this method.</p>
 </div></span>
   
 </li>
@@ -216,7 +216,8 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>world will represent this class in the game.</p>
+<p>The character assigned to this class by the game and how the world will
+represent this class in the game.</p>
 </div></span>
   
 </li>
@@ -262,7 +263,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The name use to represent this class.</p>
+<p>The name use to represent this classs.</p>
 </div></span>
   
 </li>
@@ -271,7 +272,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#seed-instance_method" title="#seed (instance method)">#<strong>seed</strong>  &#x21d2; String </a>
+      <a href="#seed-instance_method" title="#seed (instance method)">#<strong>seed</strong>  &#x21d2; Integer </a>
     
 
     
@@ -286,7 +287,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>be initialized into the world.</p>
+<p>You should overwrite this method.</p>
 </div></span>
   
 </li>
@@ -304,7 +305,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="classes-class_method">
   
-    .<strong>classes</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+    .<strong>classes</strong>  &#x21d2; <tt>Array&lt;Class&gt;</tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -313,13 +314,26 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute classes</p>
+<p>An array of the classes that have included this module</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Class&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -327,12 +341,12 @@
       <pre class="lines">
 
 
-6
-7
-8</pre>
+8
+9
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_classes'>classes</span>
   <span class='ivar'>@classes</span>
@@ -364,13 +378,13 @@
       <pre class="lines">
 
 
-8
-9
 10
-11</pre>
+11
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
   <span class='ivar'>@classes</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -399,7 +413,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>that you overwrite this method</p>
+<p>You should overwrite this method. A hex color string used to represent this
+class.</p>
 
 
   </div>
@@ -416,11 +431,6 @@
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a hex color string used to represent this class. It is recommended</p>
-</div>
-      
     </li>
   
 </ul>
@@ -431,12 +441,12 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color'>color</span>
   <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#</span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='qwords_beg'>%w[</span><span class='tstring_content'>0</span><span class='words_sep'> </span><span class='tstring_content'>3</span><span class='words_sep'> </span><span class='tstring_content'>6</span><span class='words_sep'> </span><span class='tstring_content'>9</span><span class='words_sep'> </span><span class='tstring_content'>C</span><span class='words_sep'> </span><span class='tstring_content'>F</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_shuffle'>shuffle</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span>
@@ -458,7 +468,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>world will represent this class in the game</p>
+<p>The character assigned to this class by the game and how the world will
+represent this class in the game</p>
 
 
   </div>
@@ -476,11 +487,6 @@
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>the character assigned to this class by the game and how the</p>
-</div>
-      
     </li>
   
 </ul>
@@ -492,12 +498,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>char:</span><span class='rparen'>)</span>
   <span class='ivar'>@char</span> <span class='op'>=</span> <span class='id identifier rubyid_char'>char</span>
@@ -522,10 +528,10 @@
       <pre class="lines">
 
 
-46</pre>
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_moves'>moves</span><span class='lparen'>(</span><span class='id identifier rubyid_world_state'>world_state</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -545,7 +551,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the name use to represent this class</p>
+<p>The name use to represent this classs</p>
 
 
   </div>
@@ -562,11 +568,6 @@
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>the name use to represent this class</p>
-</div>
-      
     </li>
   
 </ul>
@@ -577,12 +578,12 @@
       <pre class="lines">
 
 
-21
-22
-23</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -595,7 +596,7 @@
       <div class="method_details ">
   <h3 class="signature " id="seed-instance_method">
   
-    #<strong>seed</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>seed</strong>  &#x21d2; <tt>Integer</tt> 
   
 
   
@@ -604,8 +605,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>be initialized into the world. It is recommended that you overwrite this
-method</p>
+<p>You should overwrite this method. An 8x8 block representing how the
+starting cells for this class will be initialized into the world.</p>
 
 
   </div>
@@ -618,13 +619,13 @@ method</p>
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>an 8x8 block representing how the starting cells for this class will</p>
+<p>the heigh of the world</p>
 </div>
       
     </li>
@@ -637,21 +638,21 @@ method</p>
       <pre class="lines">
 
 
-33
-34
-35
-36
-37
-38
-39
 40
 41
 42
 43
-44</pre>
+44
+45
+46
+47
+48
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_seed'>seed</span>
   <span class='lbracket'>[</span>
@@ -675,7 +676,7 @@ method</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Sep  3 21:52:21 2018 by
+  Generated on Mon Sep  3 23:12:22 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.16 (ruby-2.5.1).
 </div>
