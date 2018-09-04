@@ -2,7 +2,11 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.0)
+    awesome_print (1.8.0)
+    byebug (10.0.2)
+    coderay (1.1.2)
     hike (1.2.3)
+    method_source (0.9.0)
     minitest (5.11.3)
     opal (0.11.3)
       ast (>= 2.3.0)
@@ -13,6 +17,18 @@ GEM
     parser (2.3.3.1)
       ast (~> 2.2)
     powerpack (0.1.2)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-awesome_print (9.6.11)
+      awesome_print (>= 1.1.0, < 999)
+      pry (>= 0.9.0, < 999)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
+    pry-inline (1.0.4)
+      pry (> 0.10.0, < 0.12.0)
+      unicode (~> 0.4.4)
     rainbow (2.2.2)
       rake
     rake (12.3.1)
@@ -27,6 +43,7 @@ GEM
     ruby2d (0.5.1)
       opal (~> 0.11)
     sourcemap (0.1.1)
+    unicode (0.4.4.4)
     unicode-display_width (1.4.0)
     yard (0.9.16)
 
@@ -35,6 +52,10 @@ PLATFORMS
 
 DEPENDENCIES
   minitest
+  pry
+  pry-awesome_print
+  pry-byebug
+  pry-inline
   rubocop
   ruby2d
   yard

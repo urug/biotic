@@ -40,17 +40,68 @@ describe WorldState do
   describe '#owner' do
     it 'must return the owner character for a position' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
-      world.team(0).must_equal 'X'
+      world.owner(0).must_equal 'X'
     end
 
     it 'must return nil if there is no owner character at position' do
       world = WorldState.new(width: 1, height: 1)
-      world.team(0).must_be_nil
+      world.owner(0).must_be_nil
     end
 
     it 'must return nil if the position is outside of the world' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
-      world.team(-1).must_be_nil
+      world.owner(-1).must_be_nil
+    end
+  end
+
+  # 012
+  # 345
+  # 678
+  describe '#north' do
+    it 'must return the position of the cell above' do
+      world = WorldState.new(width: 3, height: 3, state: '012345678')
+      world.north(4).must_equal 1
+    end
+
+    it 'must wrap from top edge to bottom' do
+      world = WorldState.new(width: 3, height: 3, state: '012345678')
+      world.north(1).must_equal 7
+    end
+  end
+
+  describe '#south' do
+    it 'must return the position of the cell below' do
+      world = WorldState.new(width: 3, height: 3, state: '012345678')
+      world.south(4).must_equal 7
+    end
+
+    it 'must wrap from bottom edge to top' do
+      world = WorldState.new(width: 3, height: 3, state: '012345678')
+      world.south(7).must_equal 1
+    end
+  end
+
+  describe '#east' do
+    it 'must return the position of the cell to the right' do
+      world = WorldState.new(width: 3, height: 3, state: '012345678')
+      world.east(4).must_equal 5
+    end
+
+    it 'must wrap from right to left' do
+      world = WorldState.new(width: 3, height: 3, state: '012345678')
+      world.east(5).must_equal 3
+    end
+  end
+
+  describe '#west' do
+    it 'must return the position of the cell to the left' do
+      world = WorldState.new(width: 3, height: 3, state: '012345678')
+      world.west(4).must_equal 3
+    end
+
+    it 'must wrap from left to right' do
+      world = WorldState.new(width: 3, height: 3, state: '012345678')
+      world.west(3).must_equal 5
     end
   end
 
@@ -65,10 +116,10 @@ describe WorldState do
       world.neighborhood(1).must_equal []
     end
 
+    # ABCD
+    # EFGH
+    # IJKL
     it 'must return the correct neighborhood for any position' do
-      # ABCD
-      # EFGH
-      # IJKL
       world = WorldState.new(width: 4, height: 3, state: 'ABCDEFGHIJKL')
       world.neighborhood(0).must_equal %w[L I J D A B H E F]
       world.neighborhood(1).must_equal %w[I J K A B C E F G]
