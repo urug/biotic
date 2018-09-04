@@ -35,5 +35,13 @@ render_scoreboard(Morphogen.classes.map do |k|
   k.new(char: char)
 end)
 
+def redraw
+  set background: 'random'
+end
+
+update do
+  # redraws every 2 seconds (ish)
+  redraw if (0.5 * (get :frames).to_i % (get :fps).to_i).zero?
+end
 show
 
