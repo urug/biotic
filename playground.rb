@@ -65,6 +65,7 @@ end
 
 on :key_up do |evt|
   @toggle = !@toggle if evt.key == 'space'
+  @world.clear if evt.key == 'c'
 end
 
 update do
