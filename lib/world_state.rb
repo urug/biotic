@@ -14,14 +14,14 @@ class WorldState < String
   # raised when a position is outside of the world
   class InvalidPosition < StandardError; end
 
-  # @param width [Integer] how wide the world is
-  # @param height [Integer] how high the world is
-  # @param state [String] an initial state
-  def initialize(width:, height:, state: nil)
+  # @param width [Integer]
+  # @param height [Integer]
+  # @param init [String]
+  def initialize(width:, height:, init: nil)
     raise InvalidDimension if width < 1 || height < 1
     raise InvalidState if state && width * height != state.length
 
-    state ? super(state) : super(' ' * (width * height))
+    init ? super(init) : super(' ' * (width * height))
     @width = width
     @height = height
   end

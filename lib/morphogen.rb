@@ -7,6 +7,7 @@ module Morphogen
     # @return [Array<Class>]
     attr_reader :classes
 
+    # @param klass [Class]
     def included(klass)
       @classes ||= []
       @classes << klass
@@ -50,5 +51,11 @@ module Morphogen
     ]
   end
 
-  def moves(world_state); end
+  # This should be overwritten. Given a current world state, return the two empty
+  # positions you'd like to move
+  # @param [WorldState]
+  # @return [Array<Integer>]
+  def moves(world_state)
+    []
+  end
 end

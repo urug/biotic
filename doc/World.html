@@ -142,7 +142,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>reset the entire world state (all dead).</p>
+</div></span>
   
 </li>
 
@@ -190,7 +192,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>transition the world from the present state to its next state.</p>
+</div></span>
   
 </li>
 
@@ -212,7 +216,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Set a player at a given position.</p>
+</div></span>
   
 </li>
 
@@ -220,7 +226,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; Object </a>
+      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; WorldState </a>
     
 
     
@@ -234,7 +240,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>returns a frozen copy of the world&#39;s current state.</p>
+</div></span>
   
 </li>
 
@@ -263,7 +271,44 @@
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>init</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -271,12 +316,12 @@
       <pre class="lines">
 
 
-7
-8
-9</pre>
+11
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/world.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/world.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>width:</span><span class='comma'>,</span> <span class='label'>height:</span><span class='comma'>,</span> <span class='label'>init:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@state</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="WorldState.html" title="WorldState (class)">WorldState</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WorldState.html#initialize-instance_method" title="WorldState#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>width:</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='id identifier rubyid_height'>height</span><span class='comma'>,</span> <span class='label'>state:</span> <span class='id identifier rubyid_init'>init</span><span class='rparen'>)</span>
@@ -302,18 +347,29 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>reset the entire world state (all dead)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-11
-12
-13</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/world.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/world.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clear'>clear</span>
   <span class='ivar'>@state</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="WorldState.html" title="WorldState (class)">WorldState</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WorldState.html#initialize-instance_method" title="WorldState#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>width:</span> <span class='ivar'>@state</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='ivar'>@state</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
@@ -332,23 +388,34 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>transition the world from the present state to its next state</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-23
-24
-25
-26
-27
-28
-29
-30</pre>
+34
+35
+36
+37
+38
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/world.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/world.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_iterate'>iterate</span>
   <span class='ivar'>@state</span><span class='period'>.</span><span class='id identifier rubyid_each_char'>each_char</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span><span class='period'>.</span><span class='id identifier rubyid_each_with_object'>each_with_object</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='lparen'>(</span><span class='id identifier rubyid_curr'>curr</span><span class='comma'>,</span> <span class='id identifier rubyid_pos'>pos</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_memo'>memo</span><span class='op'>|</span>
@@ -372,18 +439,65 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set a player at a given position</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>player</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a character representing a player, or space for dead cell</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pos</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the position it should be set at</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-19
-20
-21</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/world.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/world.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_player'>set_player</span><span class='lparen'>(</span><span class='label'>player:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>pos:</span><span class='rparen'>)</span>
   <span class='ivar'>@state</span><span class='lbracket'>[</span><span class='id identifier rubyid_pos'>pos</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_player'>player</span>
@@ -396,24 +510,48 @@
       <div class="method_details ">
   <h3 class="signature " id="state-instance_method">
   
-    #<strong>state</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>state</strong>  &#x21d2; <tt><span class='object_link'><a href="WorldState.html" title="WorldState (class)">WorldState</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>returns a frozen copy of the world&#39;s current state</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WorldState.html" title="WorldState (class)">WorldState</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-15
-16
-17</pre>
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/world.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/world.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_state'>state</span>
   <span class='ivar'>@state</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
@@ -428,7 +566,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep  5 19:54:49 2018 by
+  Generated on Wed Sep  5 20:12:28 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.16 (ruby-2.5.1).
 </div>

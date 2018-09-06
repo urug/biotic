@@ -226,7 +226,7 @@ represent this class in the game.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#moves-instance_method" title="#moves (instance method)">#<strong>moves</strong>(world_state)  &#x21d2; Object </a>
+      <a href="#moves-instance_method" title="#moves (instance method)">#<strong>moves</strong>(world_state)  &#x21d2; Array&lt;Integer&gt; </a>
     
 
     
@@ -240,7 +240,9 @@ represent this class in the game.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>This should be overwritten.</p>
+</div></span>
   
 </li>
 
@@ -372,19 +374,43 @@ represent this class in the game.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>klass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-10
 11
 12
-13</pre>
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
   <span class='ivar'>@classes</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -441,12 +467,12 @@ class.</p>
       <pre class="lines">
 
 
-32
 33
-34</pre>
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color'>color</span>
   <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#</span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='qwords_beg'>%w[</span><span class='tstring_content'>0</span><span class='words_sep'> </span><span class='tstring_content'>3</span><span class='words_sep'> </span><span class='tstring_content'>6</span><span class='words_sep'> </span><span class='tstring_content'>9</span><span class='words_sep'> </span><span class='tstring_content'>C</span><span class='words_sep'> </span><span class='tstring_content'>F</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_shuffle'>shuffle</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span>
@@ -498,12 +524,12 @@ represent this class in the game</p>
       <pre class="lines">
 
 
-19
 20
-21</pre>
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>char:</span><span class='rparen'>)</span>
   <span class='ivar'>@char</span> <span class='op'>=</span> <span class='id identifier rubyid_char'>char</span>
@@ -516,24 +542,68 @@ represent this class in the game</p>
       <div class="method_details ">
   <h3 class="signature " id="moves-instance_method">
   
-    #<strong>moves</strong>(world_state)  &#x21d2; <tt>Object</tt> 
+    #<strong>moves</strong>(world_state)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This should be overwritten. Given a current world state, return the two
+empty positions you&#39;d like to move</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'></span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="WorldState.html" title="WorldState (class)">WorldState</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-53</pre>
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 58</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_moves'>moves</span><span class='lparen'>(</span><span class='id identifier rubyid_world_state'>world_state</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_moves'>moves</span><span class='lparen'>(</span><span class='id identifier rubyid_world_state'>world_state</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -578,12 +648,12 @@ represent this class in the game</p>
       <pre class="lines">
 
 
-25
 26
-27</pre>
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -638,7 +708,6 @@ starting cells for this class will be initialized into the world.</p>
       <pre class="lines">
 
 
-40
 41
 42
 43
@@ -649,10 +718,11 @@ starting cells for this class will be initialized into the world.</p>
 48
 49
 50
-51</pre>
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/morphogen.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_seed'>seed</span>
   <span class='lbracket'>[</span>
@@ -676,7 +746,7 @@ starting cells for this class will be initialized into the world.</p>
 </div>
 
       <div id="footer">
-  Generated on Wed Sep  5 19:54:49 2018 by
+  Generated on Wed Sep  5 20:12:28 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.16 (ruby-2.5.1).
 </div>
