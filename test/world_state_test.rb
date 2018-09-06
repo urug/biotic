@@ -50,20 +50,20 @@ describe WorldState do
     end
   end
 
-  describe '#owner' do
-    it 'must return the owner character for a position' do
+  describe '#player' do
+    it 'must return the player character for a position' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
-      world.owner(0).must_equal 'X'
+      world.player(0).must_equal 'X'
     end
 
-    it 'must return nil if there is no owner character at position' do
+    it 'must return nil if there is no player character at position' do
       world = WorldState.new(width: 1, height: 1)
-      world.owner(0).must_be_nil
+      world.player(0).must_be_nil
     end
 
     it 'must raise if the position is outside of the world' do
       world = WorldState.new(width: 1, height: 1, state: 'X')
-      -> { world.owner(-1) }.must_raise WorldState::InvalidPosition
+      -> { world.player(-1) }.must_raise WorldState::InvalidPosition
     end
   end
 

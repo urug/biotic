@@ -37,7 +37,7 @@ def draw_world
     y = pos / WIDTH
     if state.live?(pos)
       Square.new x: x * CELL_SIZE, y: y * CELL_SIZE, size: CELL_SIZE,
-        color: COLORS[state.owner(pos)]
+        color: COLORS[state.player(pos)]
     end
   end
 end
@@ -56,10 +56,10 @@ on :mouse_up do |evt|
   position = WIDTH * (evt.y / CELL_SIZE) + (evt.x / CELL_SIZE)
   state = @world.state
   if state.live?(position)
-    @world.set_owner(owner: ' ', pos: position)
+    @world.set_player(player: ' ', pos: position)
   else
-    @world.set_owner(owner: 'A', pos: position) if evt.button == :left
-    @world.set_owner(owner: 'B', pos: position) if evt.button == :right
+    @world.set_player(player: 'A', pos: position) if evt.button == :left
+    @world.set_player(player: 'B', pos: position) if evt.button == :right
   end
 end
 

@@ -16,8 +16,8 @@ class World
     @state.dup.freeze
   end
 
-  def set_owner(owner: ' ', pos:)
-    @state[pos] = owner
+  def set_player(player: ' ', pos:)
+    @state[pos] = player
   end
 
   def iterate
@@ -25,7 +25,7 @@ class World
       nxt = @state.next(pos)
       curr == nxt ? memo : memo << [nxt, pos]
     end.each do |char, pos|
-      set_owner(owner: char, pos: pos)
+      set_player(player: char, pos: pos)
     end
   end
 end

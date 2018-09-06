@@ -42,15 +42,15 @@ class WorldState < String
     self[pos] && self[pos] == ' '
   end
 
-  # the owner character for a live cell, or space if dead cell
+  # the player character for a live cell, or space if dead cell
   # @param pos [Integer]
   # @return [String]
-  def o(pos)
+  def p(pos)
     valid_position?(pos)
     return if self[pos] == ' '
     self[pos]
   end
-  alias owner o
+  alias player p
 
   # the position northwest (up, left) of the position
   # @param pos [Integer]
@@ -133,7 +133,7 @@ class WorldState < String
   # rubocop:disable Metrics/AbcSize
   # I like how this reads as written, rubocop
 
-  # The owner chars or emptiness around the position (includes position)
+  # The player chars or emptiness around the position (includes position)
   # @param pos [Integer] a position in the world
   # @return [Array<String>]
   def neighborhood(pos)
@@ -147,14 +147,14 @@ class WorldState < String
   end
   # rubocop:enable all
 
-  # The owner char of this position in the next state; space if dead
+  # The player char of this position in the next state; space if dead
   # @param pos [Integer]
   # @return [String]
   def next(pos)
     valid_position?(pos)
     nhood = neighborhood(pos)
 
-    return handle_dead(nhood) if o(pos) == ' '
+    return handle_dead(nhood) if p(pos) == ' '
 
     # overpopulation
     return ' ' if nhood.count(' ') < 5
