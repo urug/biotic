@@ -45,6 +45,14 @@ Then:
 
     bundle install
 
+### Playground
+
+    ruby playground.rb
+
+This is a testing ground for strategies. Left-click to activate cells for one player.
+Right-click to activate cells for another player. Press space bar to pause/continue.
+Press 'c' to clear all of the cells.
+
 ### Execution
 
     ruby app.rb
