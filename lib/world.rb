@@ -9,7 +9,7 @@ class World
   # @param height [Integer]
   # @param init [String]
   def initialize(width:, height:, init: nil)
-    @state = WorldState.new(width: width, height: height, state: init)
+    @state = WorldState.new(width: width, height: height, init: init)
   end
 
   # reset the entire world state (all dead)

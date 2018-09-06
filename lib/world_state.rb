@@ -19,7 +19,7 @@ class WorldState < String
   # @param init [String]
   def initialize(width:, height:, init: nil)
     raise InvalidDimension if width < 1 || height < 1
-    raise InvalidState if state && width * height != state.length
+    raise InvalidState if init && width * height != init.length
 
     init ? super(init) : super(' ' * (width * height))
     @width = width
