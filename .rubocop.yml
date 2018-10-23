@@ -20,4 +20,3 @@ Metrics/BlockLength:
 Lint/UnneededCopDisableDirective:
   Exclude:
     - 'test/**'
-

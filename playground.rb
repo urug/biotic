@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'bundler/setup'
 require 'ruby2d'
@@ -11,7 +13,7 @@ FULL_HEIGHT = HEIGHT * CELL_SIZE
 # https://bootflat.github.io/documentation.html
 BACKGROUND_COLOR = '#434A54'
 GRID_COLOR = '#656D78'
-COLORS = { 'A' => '#A0D468', 'B' => '#FC6E51' }
+COLORS = { 'A' => '#A0D468', 'B' => '#FC6E51' }.freeze
 
 set title: 'Playground', width: FULL_WIDTH, height: FULL_HEIGHT,
     background: BACKGROUND_COLOR
@@ -21,23 +23,25 @@ set title: 'Playground', width: FULL_WIDTH, height: FULL_HEIGHT,
 
 def draw_grid
   WIDTH.times do |x|
-    Line.new x1: x * CELL_SIZE, x2: x * CELL_SIZE, y1: 0, y2: FULL_HEIGHT,
-      color: GRID_COLOR
+    Line.new(
+      x1: x * CELL_SIZE, x2: x * CELL_SIZE, y1: 0, y2: FULL_HEIGHT, color: GRID_COLOR
+    )
   end
   HEIGHT.times do |y|
-    Line.new x1: 0, x2: FULL_WIDTH, y1: y * CELL_SIZE, y2: y * CELL_SIZE,
-      color: GRID_COLOR
+    Line.new(
+      x1: 0, x2: FULL_WIDTH, y1: y * CELL_SIZE, y2: y * CELL_SIZE, color: GRID_COLOR
+    )
   end
 end
 
 def draw_world
   state = @world.state
-  state.each_char.each_with_index do |char, pos|
+  state.size.times do |pos|
     x = pos % WIDTH
     y = pos / WIDTH
     if state.live?(pos)
-      Square.new x: x * CELL_SIZE, y: y * CELL_SIZE, size: CELL_SIZE,
-        color: COLORS[state.player(pos)]
+      Square.new(x: x * CELL_SIZE, y: y * CELL_SIZE, size: CELL_SIZE,
+                 color: COLORS[state.player(pos)])
     end
   end
 end

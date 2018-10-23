@@ -30,6 +30,13 @@ class World
     @state[pos] = player
   end
 
+  # get the current score for a given player
+  # @param player [String] a character representing a player
+  # @return [Integer]
+  def player_score(player)
+    @state.count(player)
+  end
+
   # transition the world from the present state to its next state
   def iterate
     @state.each_char.each_with_index.each_with_object([]) do |(curr, pos), memo|
