@@ -16,7 +16,7 @@ module Morphogen
 
   attr_reader :char
 
-  # Don't overwrite this method
+  # Don't overwrite this method.
   # The character assigned to this class by the game and how the world will represent
   # this class in the game
   # @param char [String]
@@ -24,8 +24,8 @@ module Morphogen
     @char = char
   end
 
-  # You can overwrite this method
-  # The name use to represent this class
+  # You can overwrite this method.
+  # The name used to represent this class.
   # @return [String]
   def name
     self.class.to_s
@@ -38,9 +38,9 @@ module Morphogen
     @color ||= '#' + %w[0 3 6 9 C F].shuffle.join
   end
 
-  # You should overwrite this method
-  # Given a current world state, return the two empty
-  # positions you'd like to move
+  # You should overwrite this method.
+  # Given a current world state, return the two (empty) positions you'd like to make as
+  # moves.
   # @param world_state [WorldState]
   # @return [Array<Integer>]
   def moves(world_state)
