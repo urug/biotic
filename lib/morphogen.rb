@@ -39,6 +39,22 @@ module Morphogen
   end
 
   # You should overwrite this method.
+  # This is your starting pattern in the game
+  # @return [Array<String>]
+  def seed
+    [
+      'X X X X ',
+      ' X X X X',
+      'X X X X ',
+      ' X X X X',
+      'X X X X ',
+      ' X X X X',
+      'X X X X ',
+      ' X X X X',
+    ]
+  end
+
+  # You should overwrite this method.
   # Given a current world state, return the two (empty) positions you'd like to make as
   # moves.
   # @param world_state [WorldState]

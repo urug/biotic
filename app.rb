@@ -16,7 +16,7 @@ GUTTER      = 24
 SIDEBAR     = 240
 FULL_HEIGHT = HEIGHT * CELL_SIZE
 FULL_WIDTH  = WIDTH * CELL_SIZE + GUTTER + SIDEBAR
-
+STARTING    = [3620, 3660, 3700, 7220, 7260, 7700]
 @world = World.new(width: WIDTH, height: HEIGHT)
 
 @morphogens = Morphogen.classes.shuffle.each_with_index.each_with_object({}) do |(klass, index), hash|
@@ -27,6 +27,9 @@ end
 @morphogens_enumerator = @morphogens.cycle
 
 # starting positions
+@morphogens.each_with_index do |(char, morphogen), index|
+  @world.seed_player(pos: STARTING[index], seed: morphogen.seed, char: char)
+end
 
 def make_moves
   morphogen = @morphogens_enumerator.next[1]

@@ -37,6 +37,22 @@ class World
     @state.count(player)
   end
 
+  # takes a morphogen seed and puts it (starting at) the given position
+  # @param pos [Integer]
+  # @param seed [Array<String>]
+  # @param char [String]
+  def seed_player(pos:, seed:, char:)
+    return unless seed.length == 8
+    seed.each do |string|
+      return unless string.length == 8
+      string.each_char do |c|
+        set_player(player: char, pos: pos) if c == 'X'
+        pos += 1
+      end
+      pos += @state.width - string.length
+    end
+  end
+
   # transition the world from the present state to its next state
   def iterate
     @state.each_char.each_with_index.each_with_object([]) do |(curr, pos), memo|
