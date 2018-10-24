@@ -16,7 +16,7 @@ GUTTER      = 24
 SIDEBAR     = 240
 FULL_HEIGHT = HEIGHT * CELL_SIZE
 FULL_WIDTH  = WIDTH * CELL_SIZE + GUTTER + SIDEBAR
-STARTING    = [3620, 3660, 3700, 7220, 7260, 7700]
+STARTING    = [3620, 3660, 3700, 7220, 7260, 7700].freeze
 @world = World.new(width: WIDTH, height: HEIGHT)
 
 @morphogens = Morphogen.classes.shuffle.each_with_index.each_with_object({}) do |(klass, index), hash|
