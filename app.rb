@@ -43,9 +43,6 @@ default = { size: FONT_SIZE, font: FONT, x: FULL_WIDTH - SIDEBAR }
   y += FONT_SIZE * 3
 end
 
-# text object for displaying the number of turns
-@turns_counter = Text.new(default.merge(y: y + FONT_SIZE, text: "turns: #{@world.turns}", color: 'white'))
-
 def make_moves
   morphogen = @morphogens_enumerator.next[1]
   moves = morphogen.moves(@world.state)
@@ -59,8 +56,6 @@ def update_scoreboard
     @player_stats[morphogen.name][:score].add
     @player_stats[morphogen.name][:name].add
   end
-  @turns_counter.text = "turns: #{@world.turns}"
-  @turns_counter.add
 end
 
 set title: 'Biotic', width: FULL_WIDTH, height: FULL_HEIGHT
