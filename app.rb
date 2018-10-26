@@ -31,6 +31,21 @@ end
   @world.seed_player(pos: STARTING[index], seed: morphogen.seed, char: char)
 end
 
+# text objects for player stats
+@player_stats = {}
+y = 0
+default = { size: FONT_SIZE, font: FONT, x: FULL_WIDTH - SIDEBAR }
+@morphogens.each do |char, morphogen|
+  @player_stats[morphogen.name] = {
+    name: Text.new(default.merge(y: y, text: morphogen.name, color: morphogen.color)),
+    score: Text.new(default.merge(y: y + FONT_SIZE, text: "score: #{@world.player_score(char)}", color: 'white'))
+  }
+  y += FONT_SIZE * 3
+end
+
+# text object for displaying the number of turns
+@turns_counter = Text.new(default.merge(y: y + FONT_SIZE, text: "turns: #{@world.turns}", color: 'white'))
+
 def make_moves
   morphogen = @morphogens_enumerator.next[1]
   moves = morphogen.moves(@world.state)
@@ -38,15 +53,14 @@ def make_moves
   @world.set_player(player: morphogen.char, pos: moves[1])
 end
 
-def render_scoreboard
-  y = 0
-  default = { size: FONT_SIZE, font: FONT, x: FULL_WIDTH - SIDEBAR }
+def update_scoreboard
   @morphogens.each do |char, morphogen|
-    score = @world.player_score(char)
-    Text.new(default.merge(y: y, text: morphogen.name, color: morphogen.color))
-    Text.new(default.merge(y: y + FONT_SIZE, text: "score: #{score}", color: 'white'))
-    y += FONT_SIZE * 3
+    @player_stats[morphogen.name][:score].text = "score: #{@world.player_score(char)}"
+    @player_stats[morphogen.name][:score].add
+    @player_stats[morphogen.name][:name].add
   end
+  @turns_counter.text = "turns: #{@world.turns}"
+  @turns_counter.add
 end
 
 set title: 'Biotic', width: FULL_WIDTH, height: FULL_HEIGHT
@@ -67,7 +81,7 @@ def redraw
   clear
   make_moves
   render_world
-  render_scoreboard
+  update_scoreboard
   @world.iterate
 end
 
