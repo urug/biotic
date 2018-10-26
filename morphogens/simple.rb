@@ -34,6 +34,6 @@ class Simple
       world_state.sw(pos),
       world_state.w(pos),
       world_state.nw(pos)
-    ].sample(2)
+    ].reject(&:negative?).reject{|pos| pos > world_state.size}.sample(2)
   end
 end
